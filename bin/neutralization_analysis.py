@@ -33,10 +33,12 @@ os.makedirs(output_directory, exist_ok=True)
 
 input_excel_sheet = openpyxl.load_workbook(plate_reader_file_path)
 
+sheet_i=1
+
 for sheet in input_excel_sheet:
-    sheet_title_list = sheet.title.split()
-    new_sheet_title = sheet_title_list[0] + '_' + sheet_title_list[1]
+    new_sheet_title = 'Plate_' + sheet_i
     sheet.title = new_sheet_title
+    sheet_i = sheet_i+1
 
 renamed_sheet_file = output_prefix + '_renamed.xlsx'
 renamed_sheet_file_path = os.path.join(output_directory, renamed_sheet_file)
