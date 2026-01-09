@@ -5,27 +5,27 @@ This program takes Excel workbooks generated from the 96-well neutralization pro
 ## Initial Set-up
 
 1. Install Python 3 using Homebrew.
-```
+```bash
 brew install python
 ```
 2. Install pandas, openpyxl, numpy, scipy, scikit-learn, matplotlib.
-```
+```bash
 pip install numpy pandas openpyxl scipy scikit-learn matplotlib
 ```
 3. Clone Git Repo locally.
-```
+```bash
 cd ~
 git clone https://github.com/aminaddetia/neutralization_analysis
 ```
 4. Make neutralization_analysis.py executable from the command line. 
-```
+```bash
 cd ~/neutralization_analysis/bin
 chmod +x neutralization_analysis.py
 echo 'export PATH="<absolute/path/to>/neutralization_analysis/bin:$PATH"' >> ~/.zshrc #Replace <absolute/path/to> based on your local naming (will likely be /Users/Username/)
 source ~/.zshrc
 ```
 5. Confirm everything is working properly.
-```
+```bash
 mkdir ~/Documents/neutralization_example
 cd ~/Documents/neutralization_example
 cp ~/neutralization_analysis/example/* .
