@@ -15,6 +15,7 @@ pip install numpy pandas openpyxl scipy scikit-learn matplotlib
 3. Clone Git Repo locally.
 ```bash
 cd ~
+mkdir neutralization_analysis
 git clone https://github.com/aminaddetia/neutralization_analysis
 ```
 4. Make neutralization_analysis.py executable from the command line. 
