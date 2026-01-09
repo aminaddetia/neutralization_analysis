@@ -88,7 +88,7 @@ for key, value in renamed_excel_sheet.items():
     cells_only_avg_RLU = cells_only_total_RLU/cells_only_counter
 
     clean_excel_sheet.replace('OVRFLW', -999999, inplace=True)
-    clean_excel_sheet.replace('', -999999, inplace=True)
+    clean_excel_sheet.fillna(-999999, inplace=True)
 
     def normalize(x):
         if x == -999999:
@@ -141,9 +141,9 @@ for row in metadata.itertuples():
     sample_number = 'sample' + str(sample_i)
 
     for i in range(dilutions):
-        if sample_type == 'sera':
+        if sample_type.lower() == 'sera':
             total_dilution = starting_dilution / ((1/dilution_factor) ** i)
-        if sample_type == 'antibody':
+        if sample_type.lower() == 'antibody':
             total_dilution = starting_dilution / (dilution_factor ** i)
         sample_code = sample_number + '_' + str(i+1)
         new_tidy_data_d = {'Sample_ID': sample_ID, 'Bleed' : bleed, 'Treatment' : treatment, 'Virus' : virus, 'Group' : group, 'Sample_Type' : sample_type, 'Dilution': total_dilution, 'Plate_Number': plate_number, 'Sample_Code': sample_code}
@@ -214,13 +214,14 @@ for row in tidy_df.itertuples():
             if tuple[1] != -999999:
                 normalized_values.append(tuple[1])
 
-    tech_rep = 1
+    tech_rep = 0
 
     for i in range(len(normalized_values)):
-        pos = tech_rep - 1
+        pos = tech_rep
+        tech_rep = tech_rep + 1
         new_row = [getattr(row,'Sample_ID'),getattr(row,'Bleed'), getattr(row,'Treatment'), getattr(row,'Group'), getattr(row,'Virus'), getattr(row,'Sample_Type'), getattr(row,'Dilution'),getattr(row,'Plate_Number'), getattr(row,'Sample_Code'), tech_rep, normalized_values[pos]]
         tidy_unaveraged_df.loc[len(tidy_unaveraged_df)] = new_row
-        tech_rep = tech_rep + 1
+
 
 #Creates and writes a csv file with the averaged normalzied RLU values, standard deviation, and number of technical replicates for each sample. Can be directly pasted into Prism for plotting or IC50 determination.
 
@@ -265,10 +266,10 @@ for row in metadata.itertuples():
 
     i = i + 1
 
-if sample_type == 'sera':
+if sample_type.lower() == 'sera':
     normalized_results_df.sort_values(by='Dilution', ascending=True, inplace=True)
 
-if sample_type == 'antibody':
+if sample_type.lower() == 'antibody':
     normalized_results_df.sort_values(by='Dilution', ascending=False, inplace=True)
     normalized_results_df.rename(columns={'Dilution' : 'Concentration'}, inplace = True)
 
@@ -462,9 +463,9 @@ else:
             ax.set_ylim(bottom = 0)
         if y_range[1] < 100:
             ax.set_ylim(top = 100)
-        if sample_type == 'sera':
+        if sample_type.lower() == 'sera':
             ax.set_xlabel('Reciprocal Dilution')
-        if sample_type == 'antibody':
+        if sample_type.lower() == 'antibody':
             if unit == None:
                 ax.set_xlabel('Concentration')
             else:
