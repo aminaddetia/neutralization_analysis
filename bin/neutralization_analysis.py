@@ -36,7 +36,7 @@ input_excel_sheet = openpyxl.load_workbook(plate_reader_file_path)
 sheet_i=1
 
 for sheet in input_excel_sheet:
-    new_sheet_title = 'Plate_' + sheet_i
+    new_sheet_title = 'Plate_' + str(sheet_i)
     sheet.title = new_sheet_title
     sheet_i = sheet_i+1
 
