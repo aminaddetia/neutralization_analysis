@@ -4,7 +4,7 @@ This program takes Excel workbooks generated from the 96-well neutralization pro
 
 ## Initial Set-up
 
-1. Install Python 3 using Homebrew.
+1. If you do not have Python 3 installed on your computer, install Python 3 using Homebrew.
 ```bash
 brew install python
 ```
@@ -31,7 +31,7 @@ cd ~/Documents/neutralization_example
 cp ~/neutralization_analysis/example/* .
 neutralization_analysis.py -e example_Data.xlsx -m example_metadata.csv -l example_plate_layout.csv -o setup_test
 ```
-Check if a new directory titled 'setup_test' was created inside of the neutralization_example directory and contains four ouput files: setup_test_ic50_results.csv, setup_test_tidy_data.csv, setup_test_individual_plots.pdf, setup_test_normalized_values.csv. If so, you ready to run the program with your data.
+Check if a new directory titled 'setup_test' was created inside of the neutralization_example directory and contains four ouput files: setup_test_ic50_results.csv, setup_test_tidy_data.csv, setup_test_individual_plots.pdf, setup_test_normalized_values.csv. Any FutureWarnings appearing in Terminal can be ignored. If so, you ready to run the program with your data. 
 
 ## Running neutralization_analysis.py
 
